@@ -1,0 +1,15 @@
+# Normalise line endings: LF in the repository and in working copies, so the
+# Dart/Kotlin sources, scripts and generated files look identical everywhere.
+* text=auto eol=lf
+
+# Windows-only scripts keep CRLF.
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# Binaries.
+*.png binary
+*.jpg binary
+*.jar binary
+*.apk binary
+*.keystore binary
+*.jks binary
