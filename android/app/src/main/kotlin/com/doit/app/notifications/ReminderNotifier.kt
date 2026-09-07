@@ -91,7 +91,8 @@ class ReminderNotifier(context: Context) : NotificationGateway {
         /** Ringing reminders: silent channel, the sound is played by AlarmRingService. */
         const val ALARM_CHANNEL_ID = "do_it_alarms"
 
-        private const val BRAND_COLOR = 0xFF6B4EFF.toInt()
+        /** Same orange as AppTheme.seed and the launcher icon. */
+        private const val BRAND_COLOR = 0xFFFE7F2D.toInt()
         private const val STATUS_TEXT = "You haven't completed this yet."
 
         fun ensureChannels(context: Context) {

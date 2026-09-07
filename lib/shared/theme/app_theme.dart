@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
 
-/// Material 3 theme.
+/// Material 3 theme built on a four-colour palette
+/// (https://colorhunt.co/palette/000000233d4dfe7f2deaecf0):
 ///
-/// Palette: electric violet as the brand colour (matches the launcher icon),
-/// mint for "done" states (tertiary role), amber for attention (secondary
-/// role: reliability warnings), and a deep navy-violet dark mode instead of
-/// plain grey. Every override below is paired with its "on" colour and was
-/// checked for WCAG AA contrast.
+///   #FE7F2D orange   action colour: buttons, FAB, active occurrence, chips
+///   #233D4D slate    attention surfaces, secondary text, dark-mode cards
+///   #EAECF0 cloud    light-mode background, dark-mode text
+///   #000000 black    dark-mode background, light-mode text, "done" badge
+///
+/// White text does not pass contrast on the orange, so everything on primary
+/// is black. Every override is paired with its "on" colour and checked for
+/// WCAG AA contrast.
 class AppTheme {
   AppTheme._();
 
-  /// Brand violet, also the launcher icon gradient's mid tone.
-  static const Color seed = Color(0xFF6B4EFF);
+  static const Color orange = Color(0xFFFE7F2D);
+  static const Color slate = Color(0xFF233D4D);
+  static const Color cloud = Color(0xFFEAECF0);
+  static const Color black = Color(0xFF000000);
 
-  /// Mint used by the icon's dot and by completed states.
-  static const Color mint = Color(0xFF3DF0BE);
+  /// Brand colour, also used by the launcher icon and notification accent.
+  static const Color seed = orange;
 
   static ThemeData light() => _build(Brightness.light);
   static ThemeData dark() => _build(Brightness.dark);
@@ -24,46 +30,40 @@ class AppTheme {
     return ColorScheme.fromSeed(
       seedColor: seed,
       brightness: brightness,
-      dynamicSchemeVariant: DynamicSchemeVariant.vibrant,
-      // Primary: violet.
-      primary: light ? seed : const Color(0xFFB9ACFF),
-      onPrimary: light ? Colors.white : const Color(0xFF1F0A78),
-      primaryContainer:
-          light ? const Color(0xFFE6E0FF) : const Color(0xFF3B1FC4),
+      dynamicSchemeVariant: DynamicSchemeVariant.fidelity,
+      // Primary: orange with black on top.
+      primary: orange,
+      onPrimary: black,
+      primaryContainer: light ? const Color(0xFFFFDCC6) : const Color(0xFF4A2610),
       onPrimaryContainer:
-          light ? const Color(0xFF1A0A66) : const Color(0xFFE6E0FF),
-      // Secondary: amber, reserved for "needs attention" surfaces.
-      secondary: light ? const Color(0xFFB25E00) : const Color(0xFFFFB866),
-      onSecondary: light ? Colors.white : const Color(0xFF472A00),
-      secondaryContainer:
-          light ? const Color(0xFFFFE0B8) : const Color(0xFF6A3F00),
-      onSecondaryContainer:
-          light ? const Color(0xFF4A2800) : const Color(0xFFFFDDB3),
-      // Tertiary: mint, the colour of getting it done.
-      tertiary: light ? const Color(0xFF0B7F60) : mint,
-      onTertiary: light ? Colors.white : const Color(0xFF003826),
+          light ? const Color(0xFF3D1C05) : const Color(0xFFFFDCC6),
+      // Secondary: slate, the "needs attention" role.
+      secondary: light ? slate : const Color(0xFF9FB6C4),
+      onSecondary: light ? cloud : const Color(0xFF0F1E28),
+      secondaryContainer: slate,
+      onSecondaryContainer: cloud,
+      // Tertiary: black/cloud, the colour of getting it done.
+      tertiary: light ? black : cloud,
+      onTertiary: light ? cloud : black,
       tertiaryContainer:
-          light ? const Color(0xFFBDF5E3) : const Color(0xFF005140),
-      onTertiaryContainer:
-          light ? const Color(0xFF00382A) : const Color(0xFF9FFADC),
-      // Surfaces: lavender-tinted white / deep navy-violet.
-      surface: light ? const Color(0xFFFBFAFF) : const Color(0xFF0F0E1A),
-      onSurface: light ? const Color(0xFF17142B) : const Color(0xFFE7E4F5),
-      surfaceContainerLowest:
-          light ? Colors.white : const Color(0xFF0A0913),
-      surfaceContainerLow:
-          light ? const Color(0xFFF4F1FF) : const Color(0xFF171626),
-      surfaceContainer:
-          light ? const Color(0xFFEEEAFB) : const Color(0xFF1D1C2E),
-      surfaceContainerHigh:
-          light ? const Color(0xFFE8E4F7) : const Color(0xFF262538),
+          light ? const Color(0xFFD9DDE3) : const Color(0xFF3A4A55),
+      onTertiaryContainer: light ? black : cloud,
+      // Surfaces: cloud with white cards / true black with slate cards.
+      surface: light ? cloud : black,
+      onSurface: light ? black : cloud,
+      surfaceContainerLowest: light ? Colors.white : black,
+      surfaceContainerLow: light ? Colors.white : const Color(0xFF16262F),
+      surfaceContainer: light ? const Color(0xFFF5F6F8) : const Color(0xFF1D3240),
+      surfaceContainerHigh: light ? const Color(0xFFDFE2E8) : slate,
       surfaceContainerHighest:
-          light ? const Color(0xFFE1DDF1) : const Color(0xFF302F43),
-      onSurfaceVariant:
-          light ? const Color(0xFF5A5670) : const Color(0xFFB2AEC6),
-      outline: light ? const Color(0xFF8B87A0) : const Color(0xFF7C7893),
+          light ? const Color(0xFFD3D8DF) : const Color(0xFF2E4B5C),
+      onSurfaceVariant: light ? slate : const Color(0xFFB7C4CD),
+      outline: light ? const Color(0xFF6B7C88) : const Color(0xFF6F8592),
       outlineVariant:
-          light ? const Color(0xFFD9D4EA) : const Color(0xFF3B3A4F),
+          light ? const Color(0xFFC9D0D8) : const Color(0xFF34505F),
+      inverseSurface: light ? slate : cloud,
+      onInverseSurface: light ? cloud : black,
+      inversePrimary: orange,
     );
   }
 
@@ -132,11 +132,15 @@ class AppTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           minimumSize: const Size(0, 48),
-          side: BorderSide(color: scheme.outlineVariant),
+          foregroundColor: scheme.onSurface,
+          side: BorderSide(color: scheme.outline),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
         ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(foregroundColor: scheme.onSurface),
       ),
       chipTheme: base.chipTheme.copyWith(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

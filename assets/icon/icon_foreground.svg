@@ -1,23 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#7C5CFF"/>
-      <stop offset="1" stop-color="#4527D6"/>
+      <stop offset="0" stop-color="#2F5266"/>
+      <stop offset="1" stop-color="#0B151B"/>
     </linearGradient>
     <radialGradient id="bloom" cx="0.88" cy="0.92" r="0.8">
-      <stop offset="0" stop-color="#FF5FB0" stop-opacity="0.60"/>
-      <stop offset="1" stop-color="#FF5FB0" stop-opacity="0"/>
+      <stop offset="0" stop-color="#FE7F2D" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#FE7F2D" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="glow" cx="0.18" cy="0.10" r="0.75">
       <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.22"/>
       <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
     </radialGradient>
     <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
-      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#1A0B5E" flood-opacity="0.38"/>
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#000000" flood-opacity="0.45"/>
     </filter>
   </defs>
   <g transform="translate(512 520) scale(0.86) translate(-512 -520)">
-  <path d="M318 528 L458 668 L706 372" fill="none" stroke="#FFFFFF" stroke-width="120" stroke-linecap="round" stroke-linejoin="round" filter="url(#shadow)"/>
-  <circle cx="330" cy="336" r="54" fill="#3DF0BE" filter="url(#shadow)"/>
+  <path d="M318 528 L458 668 L706 372" fill="none" stroke="#FE7F2D" stroke-width="120" stroke-linecap="round" stroke-linejoin="round" filter="url(#shadow)"/>
+  <circle cx="330" cy="336" r="54" fill="#EAECF0" filter="url(#shadow)"/>
   </g>
 </svg>

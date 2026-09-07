@@ -381,8 +381,8 @@ and snaps back to the grid as soon as the device wakes.
 
 ## Branding: icon and colours
 
-**Launcher icon.** A bold white check on a violet-to-magenta gradient with a
-mint dot (the dot of the "i" in *It*). Sources are SVG in `assets/icon/`
+**Launcher icon.** A bold orange check on a slate-to-black gradient with a
+cloud-white dot (the dot of the "i" in *It*). Sources are SVG in `assets/icon/`
 (`icon_full`, `icon_foreground`, `icon_background`, `icon_monochrome`);
 `tool/generate_icons.py` renders them with headless Chrome at 1024 px and
 writes every Android asset: legacy mipmaps, adaptive foreground/background
@@ -398,19 +398,22 @@ python tool/generate_icons.py --no-render  # reuse the PNGs in assets/icon
 The icon assets are not bundled with the app (they are not listed under
 `flutter: assets:`).
 
-**Colour scheme** (`lib/shared/theme/app_theme.dart`). One brand hue plus two
-semantic accents, on Material 3 roles:
+**Colour scheme** (`lib/shared/theme/app_theme.dart`). A four-colour palette
+(<https://colorhunt.co/palette/000000233d4dfe7f2deaecf0>) mapped onto Material
+3 roles:
 
 | Role | Light | Dark | Used for |
 | --- | --- | --- | --- |
-| Primary (violet) | `#6B4EFF` | `#B9ACFF` | buttons, FAB, active occurrence, selected chips |
-| Tertiary (mint) | `#0B7F60` | `#3DF0BE` | completed states |
-| Secondary (amber) | `#B25E00` | `#FFB866` | reliability warnings, permission banner |
-| Surface | `#FBFAFF` | `#0F0E1A` | lavender-tinted white / deep navy-violet dark mode |
+| Primary (orange) | `#FE7F2D` | `#FE7F2D` | buttons, FAB, active occurrence, selected chips (black text on top) |
+| Secondary (slate) | `#233D4D` | `#9FB6C4` | attention surfaces: permission banner, reliability warnings, secondary text |
+| Tertiary (black / cloud) | `#000000` | `#EAECF0` | completed states |
+| Surface | `#EAECF0` with white cards | `#000000` with slate cards | light and true-black dark mode |
 
-All overrides are paired with their `on*` colours and meet WCAG AA contrast.
-The same violet is used for the notification accent (`ReminderNotifier.kt`)
-and the dark splash background (`drawable-night/launch_background.xml`).
+White text does not pass contrast on the orange, so everything on primary is
+black. All overrides are paired with their `on*` colours and meet WCAG AA
+contrast. The same orange is the notification accent (`ReminderNotifier.kt`);
+the splash background follows the light/dark surface (`values/colors.xml`,
+`values-night/colors.xml`).
 
 ---
 
