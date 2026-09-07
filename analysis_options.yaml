@@ -1,0 +1,14 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - build/**
+    - android/**
+    - "**/*.g.dart"
+
+linter:
+  rules:
+    prefer_single_quotes: true
+    # Keeping explicit initializer lists for injected private dependencies reads
+    # clearer in constructors that document each collaborator.
+    prefer_initializing_formals: false

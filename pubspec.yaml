@@ -1,0 +1,40 @@
+name: do_it
+description: "Do It - the reminder that keeps coming back until you actually do it."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # State management / dependency injection.
+  flutter_riverpod: ^3.4.3
+
+  # Local persistence (SQLite through Drift). The database file is shared with
+  # the native Android scheduling engine, see android/app/src/main/kotlin.
+  drift: ^2.34.4
+  sqlite3: ^3.5.2
+  path_provider: ^2.1.6
+  path: ^1.9.1
+
+  # Timezone-aware scheduling math.
+  timezone: ^0.11.1
+
+  # Date/time formatting.
+  intl: ^0.20.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  drift_dev: ^2.34.6
+  build_runner: ^2.16.1
+
+flutter:
+  uses-material-design: true
