@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 /// Material 3 theme built on a four-colour palette
 /// (https://colorhunt.co/palette/000000233d4dfe7f2deaecf0):
@@ -94,6 +95,18 @@ class AppTheme {
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: false,
+        // Explicit: dark status/navigation bar icons over the light surface,
+        // light icons over the black one. Without this some launchers keep
+        // white system text over the light theme on edge-to-edge Android.
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness:
+              brightness == Brightness.light ? Brightness.dark : Brightness.light,
+          statusBarBrightness: brightness,
+          systemNavigationBarColor: Colors.transparent,
+          systemNavigationBarIconBrightness:
+              brightness == Brightness.light ? Brightness.dark : Brightness.light,
+        ),
         titleTextStyle: text.headlineMedium?.copyWith(
           fontWeight: FontWeight.w800,
           letterSpacing: -0.5,
