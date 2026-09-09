@@ -160,13 +160,21 @@ class AppTheme {
         side: BorderSide(color: scheme.outlineVariant),
         backgroundColor: scheme.surfaceContainerLow,
         selectedColor: scheme.primaryContainer,
-        labelStyle: WidgetStateTextStyle.resolveWith(
-          (states) => (text.labelLarge ?? const TextStyle()).copyWith(
-            fontWeight: FontWeight.w700,
-            color: states.contains(WidgetState.selected)
+        // RawChip uses chipTheme.labelStyle verbatim and only resolves its
+        // `color`, so the style must be a plain TextStyle whose colour is a
+        // WidgetStateColor. (A WidgetStateTextStyle here has a null colour and
+        // renders the label white.)
+        labelStyle: (text.labelLarge ?? const TextStyle()).copyWith(
+          fontWeight: FontWeight.w700,
+          color: WidgetStateColor.resolveWith(
+            (states) => states.contains(WidgetState.selected)
                 ? scheme.onPrimaryContainer
                 : scheme.onSurfaceVariant,
           ),
+        ),
+        secondaryLabelStyle: (text.labelLarge ?? const TextStyle()).copyWith(
+          fontWeight: FontWeight.w700,
+          color: scheme.onPrimaryContainer,
         ),
         showCheckmark: false,
       ),
